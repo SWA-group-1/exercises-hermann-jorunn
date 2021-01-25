@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector3
 
-class Chopper(x: Float, y: Float) {
+class Task1Helicopter(x: Float, y: Float) {
     companion object {
         const val SPEED = 100F
     }

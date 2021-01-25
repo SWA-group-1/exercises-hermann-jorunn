@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.hermannm.helicopter.states.GameStateManager
 import com.hermannm.helicopter.states.MenuState
 
-class Helicopter : ApplicationAdapter() {
+class HelicopterGame : ApplicationAdapter() {
     companion object {
         const val WIDTH = 800F
         const val HEIGHT = 480F

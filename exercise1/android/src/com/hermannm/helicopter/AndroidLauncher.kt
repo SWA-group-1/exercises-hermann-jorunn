@@ -8,6 +8,6 @@ class AndroidLauncher : AndroidApplication() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val config = AndroidApplicationConfiguration()
-        initialize(Helicopter(), config)
+        initialize(HelicopterGame(), config)
     }
 }
