@@ -18,7 +18,7 @@ class MenuState(stateManager: GameStateManager): State(stateManager) {
         handleInput()
     }
     override fun render(sprites: SpriteBatch) {
-        sprites.begin();
+        sprites.begin()
         sprites.draw(background, 0F, 0F, Helicopter.WIDTH, Helicopter.HEIGHT)
         sprites.draw(playButton, (Helicopter.WIDTH / 2) - (playButton.getWidth() / 2), Helicopter.HEIGHT / 2 + 25)
         sprites.end()
