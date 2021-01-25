@@ -8,6 +8,9 @@ object DesktopLauncher {
     @JvmStatic
     fun main(arg: Array<String>) {
         val config = LwjglApplicationConfiguration()
+        config.width = Helicopter.WIDTH.toInt()
+        config.height = Helicopter.HEIGHT.toInt()
+        config.title = Helicopter.TITLE
         LwjglApplication(Helicopter(), config)
     }
 }
