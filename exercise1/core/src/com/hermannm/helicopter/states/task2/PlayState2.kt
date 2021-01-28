@@ -1,39 +1,41 @@
-package com.hermannm.helicopter.states
+package com.hermannm.helicopter.states.task2
 
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.math.Rectangle
 import com.hermannm.helicopter.HelicopterGame
-import com.hermannm.helicopter.sprites.Task1Helicopter
+import com.hermannm.helicopter.sprites.task2.Helicopter2
+import com.hermannm.helicopter.states.GameStateManager
+import com.hermannm.helicopter.states.State
 
-class Task1State(stateManager: GameStateManager): State(stateManager) {
+class PlayState2(stateManager: GameStateManager): State(stateManager) {
     init {
         camera.setToOrtho(false, HelicopterGame.WIDTH, HelicopterGame.HEIGHT)
     }
     private var background: Texture = Texture("background.jpg")
-    private val helicopter: Task1Helicopter = Task1Helicopter(150F, 100F);
+    private val helicopter2: Helicopter2 = Helicopter2(150F, 100F);
     private val topBound: Rectangle = Rectangle(
             0F, //chopper.getTexture().getWidth().toFloat(),
             0F,
             HelicopterGame.WIDTH,
-            HelicopterGame.HEIGHT - helicopter.getTexture().getHeight().toFloat()
+            HelicopterGame.HEIGHT - helicopter2.getTexture().getHeight().toFloat()
     )
     private val bottomBound: Rectangle = Rectangle(
             0F,
-            helicopter.getTexture().getHeight().toFloat(),
+            helicopter2.getTexture().getHeight().toFloat(),
             HelicopterGame.WIDTH,
-            HelicopterGame.HEIGHT - helicopter.getTexture().getHeight().toFloat()
+            HelicopterGame.HEIGHT - helicopter2.getTexture().getHeight().toFloat()
     )
     private val leftBound: Rectangle = Rectangle(
-            helicopter.getTexture().getWidth().toFloat(),
+            helicopter2.getTexture().getWidth().toFloat(),
             0F,
-            HelicopterGame.WIDTH - helicopter.getTexture().getWidth().toFloat(),
+            HelicopterGame.WIDTH - helicopter2.getTexture().getWidth().toFloat(),
             HelicopterGame.HEIGHT
     )
     private val rightBound: Rectangle = Rectangle(
             0F,
             0F,
-            HelicopterGame.WIDTH - helicopter.getTexture().getWidth().toFloat(),
+            HelicopterGame.WIDTH - helicopter2.getTexture().getWidth().toFloat(),
             HelicopterGame.HEIGHT
     )
     override fun handleInput() {
@@ -41,26 +43,26 @@ class Task1State(stateManager: GameStateManager): State(stateManager) {
     }
     fun collisions(): Array<Boolean> {
         var collisions = arrayOf(
-                !(helicopter.getBounds().overlaps(topBound)),
-                !(helicopter.getBounds().overlaps(bottomBound)),
-                !(helicopter.getBounds().overlaps(leftBound)),
-                !(helicopter.getBounds().overlaps(rightBound))
+                !(helicopter2.getBounds().overlaps(topBound)),
+                !(helicopter2.getBounds().overlaps(bottomBound)),
+                !(helicopter2.getBounds().overlaps(leftBound)),
+                !(helicopter2.getBounds().overlaps(rightBound))
         )
         return collisions
     }
+    fun
     override fun update(deltaTime: Float) {
         handleInput();
-        helicopter.changeDirection(collisions())
-        helicopter.update(deltaTime);
+        helicopter2.update(deltaTime);
     }
     override fun render(sprites: SpriteBatch) {
         sprites.setProjectionMatrix(camera.combined)
         sprites.begin()
         sprites.draw(background, 0F, 0F, HelicopterGame.WIDTH, HelicopterGame.HEIGHT)
         sprites.draw(
-                helicopter.getSprite(),
-                helicopter.getPosition().x,
-                helicopter.getPosition().y
+                helicopter2.getSprite(),
+                helicopter2.getPosition().x,
+                helicopter2.getPosition().y
         )
         sprites.end()
     }

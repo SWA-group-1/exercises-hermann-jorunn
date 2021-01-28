@@ -1,37 +1,41 @@
-package com.hermannm.helicopter.sprites
+package com.hermannm.helicopter.sprites.task2
 
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector3
 
-class Task1Helicopter(x: Float, y: Float) {
+class Helicopter2(x: Float, y: Float) {
     companion object {
         const val SPEED = 100F
     }
     private var position: Vector3 = Vector3(x, y, 0F)
-    private var velocity: Vector3 = Vector3(-SPEED, SPEED, 0F)
+    private var velocity: Vector3 = Vector3(0F, 0F, 0F)
     private var chopper: Sprite = Sprite(Texture("attackhelicopter.png"))
     fun update(deltaTime: Float) {
         velocity.scl(deltaTime)
         position.add(velocity.x, velocity.y, 0F)
         velocity.scl(1/deltaTime)
     }
-    fun changeDirection(collisions: Array<Boolean>) {
-        if (collisions[0]) {
-            velocity.y = -SPEED
+    // xMultiplier: 1 / -1 / 0, yMultiplier: 1 / -1 / 0
+    // collisions: [top, right, bottom, left]
+    fun control(xMultiplier: Int, yMultiplier: Int, collisions: Array<Boolean>) {
+        var x = xMultiplier
+        var y = yMultiplier
+        if (collisions != null) {
+            if (yMultiplier == 1 && collisions[0]) {
+                y = 0
+            } else if (yMultiplier == -1 && collisions[2]) {
+                y = 0
+            }
+            if (xMultiplier == 1 && collisions[1]) {
+                x = 0
+            } else if (xMultiplier == -1 && collisions[3]) {
+                x = 0
+            }
         }
-        if (collisions[1]) {
-            velocity.y = SPEED
-        }
-        if (collisions[2]) {
-            velocity.x = SPEED
-            chopper.setFlip(true, false)
-        }
-        if (collisions[3]) {
-            velocity.x = -SPEED
-            chopper.setFlip(false, false)
-        }
+        velocity.x = SPEED * x
+        velocity.y = SPEED * y
     }
     fun getPosition(): Vector3 {
         return position

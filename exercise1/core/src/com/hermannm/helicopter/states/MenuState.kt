@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.hermannm.helicopter.HelicopterGame
+import com.hermannm.helicopter.states.task1.PlayState1
 
 class MenuState(stateManager: GameStateManager): State(stateManager) {
     init {
@@ -13,7 +14,7 @@ class MenuState(stateManager: GameStateManager): State(stateManager) {
     private var playButton: Texture = Texture("playbutton.png")
     override fun handleInput() {
         if (Gdx.input.justTouched()) {
-            stateManager.set(Task1State(stateManager))
+            stateManager.set(PlayState1(stateManager))
             dispose()
         }
     }

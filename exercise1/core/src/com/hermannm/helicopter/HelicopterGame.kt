@@ -13,12 +13,14 @@ class HelicopterGame : ApplicationAdapter() {
         const val WIDTH = 800F
         const val HEIGHT = 480F
         const val TITLE = "Helicopter"
+        var batch: SpriteBatch? = null
     }
-    private var batch: SpriteBatch? = null
     private var stateManager: GameStateManager? = null
+    var controller: Controller? = null
     override fun create() {
         batch = SpriteBatch()
         stateManager = GameStateManager()
+        controller = Controller()
         Gdx.gl.glClearColor(1F, 0F, 0F, 1F)
         stateManager?.push(MenuState(stateManager!!))
     }
