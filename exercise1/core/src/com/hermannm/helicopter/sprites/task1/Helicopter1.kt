@@ -22,15 +22,15 @@ class Helicopter1(x: Float, y: Float) {
             velocity.y = -SPEED
         }
         if (collisions[1]) {
-            velocity.y = SPEED
-        }
-        if (collisions[2]) {
-            velocity.x = SPEED
-            chopper.setFlip(true, false)
-        }
-        if (collisions[3]) {
             velocity.x = -SPEED
             chopper.setFlip(false, false)
+        }
+        if (collisions[2]) {
+            velocity.y = SPEED
+        }
+        if (collisions[3]) {
+            velocity.x = SPEED
+            chopper.setFlip(true, false)
         }
     }
     fun getPosition(): Vector3 {

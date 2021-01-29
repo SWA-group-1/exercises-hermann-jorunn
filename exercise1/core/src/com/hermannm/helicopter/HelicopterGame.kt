@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.utils.viewport.Viewport
 import com.hermannm.helicopter.states.GameStateManager
 import com.hermannm.helicopter.states.MenuState
 
@@ -16,11 +17,9 @@ class HelicopterGame : ApplicationAdapter() {
         var batch: SpriteBatch? = null
     }
     private var stateManager: GameStateManager? = null
-    var controller: Controller? = null
     override fun create() {
         batch = SpriteBatch()
         stateManager = GameStateManager()
-        controller = Controller()
         Gdx.gl.glClearColor(1F, 0F, 0F, 1F)
         stateManager?.push(MenuState(stateManager!!))
     }

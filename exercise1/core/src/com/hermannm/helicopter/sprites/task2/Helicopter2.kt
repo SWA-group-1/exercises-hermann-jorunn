@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector3
 
 class Helicopter2(x: Float, y: Float) {
     companion object {
-        const val SPEED = 100F
+        const val SPEED = 200F
     }
     private var position: Vector3 = Vector3(x, y, 0F)
     private var velocity: Vector3 = Vector3(0F, 0F, 0F)
@@ -22,17 +22,15 @@ class Helicopter2(x: Float, y: Float) {
     fun control(xMultiplier: Int, yMultiplier: Int, collisions: Array<Boolean>) {
         var x = xMultiplier
         var y = yMultiplier
-        if (collisions != null) {
-            if (yMultiplier == 1 && collisions[0]) {
-                y = 0
-            } else if (yMultiplier == -1 && collisions[2]) {
-                y = 0
-            }
-            if (xMultiplier == 1 && collisions[1]) {
-                x = 0
-            } else if (xMultiplier == -1 && collisions[3]) {
-                x = 0
-            }
+        if (yMultiplier == 1 && collisions[0]) {
+            y = 0
+        } else if (yMultiplier == -1 && collisions[2]) {
+            y = 0
+        }
+        if (xMultiplier == 1 && collisions[1]) {
+            x = 0
+        } else if (xMultiplier == -1 && collisions[3]) {
+            x = 0
         }
         velocity.x = SPEED * x
         velocity.y = SPEED * y

@@ -78,6 +78,7 @@ class Controller {
         table.add()
         table.add(downImg).size(downImg.getWidth(), downImg.getHeight())
         table.add()
+        stage.addActor(table)
     }
     fun draw() {
         stage.draw()

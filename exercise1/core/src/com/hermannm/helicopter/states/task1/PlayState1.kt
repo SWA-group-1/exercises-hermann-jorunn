@@ -20,6 +20,12 @@ class PlayState1(stateManager: GameStateManager): State(stateManager) {
             HelicopterGame.WIDTH,
             HelicopterGame.HEIGHT - helicopter1.getTexture().getHeight().toFloat()
     )
+    private val rightBound: Rectangle = Rectangle(
+            0F,
+            0F,
+            HelicopterGame.WIDTH - helicopter1.getTexture().getWidth().toFloat(),
+            HelicopterGame.HEIGHT
+    )
     private val bottomBound: Rectangle = Rectangle(
             0F,
             helicopter1.getTexture().getHeight().toFloat(),
@@ -32,21 +38,15 @@ class PlayState1(stateManager: GameStateManager): State(stateManager) {
             HelicopterGame.WIDTH - helicopter1.getTexture().getWidth().toFloat(),
             HelicopterGame.HEIGHT
     )
-    private val rightBound: Rectangle = Rectangle(
-            0F,
-            0F,
-            HelicopterGame.WIDTH - helicopter1.getTexture().getWidth().toFloat(),
-            HelicopterGame.HEIGHT
-    )
     override fun handleInput() {
 
     }
     fun collisions(): Array<Boolean> {
         var collisions = arrayOf(
                 !(helicopter1.getBounds().overlaps(topBound)),
+                !(helicopter1.getBounds().overlaps(rightBound)),
                 !(helicopter1.getBounds().overlaps(bottomBound)),
-                !(helicopter1.getBounds().overlaps(leftBound)),
-                !(helicopter1.getBounds().overlaps(rightBound))
+                !(helicopter1.getBounds().overlaps(leftBound))
         )
         return collisions
     }
