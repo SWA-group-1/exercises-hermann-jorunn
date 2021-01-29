@@ -27,10 +27,16 @@ class Helicopter2(x: Float, y: Float) {
         } else if (yMultiplier == -1 && collisions[2]) {
             y = 0
         }
-        if (xMultiplier == 1 && collisions[1]) {
-            x = 0
-        } else if (xMultiplier == -1 && collisions[3]) {
-            x = 0
+        if (xMultiplier == 1) {
+            chopper.setFlip(true, false)
+            if (collisions[1]) {
+                x = 0
+            }
+        } else if (xMultiplier == -1) {
+            chopper.setFlip(false, false)
+            if (collisions[3]) {
+                x = 0
+            }
         }
         velocity.x = SPEED * x
         velocity.y = SPEED * y
