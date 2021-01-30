@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
+import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.StretchViewport
 import com.badlogic.gdx.utils.viewport.Viewport
 import com.hermannm.helicopter.HelicopterGame
@@ -35,36 +36,32 @@ class MenuState(stateManager: GameStateManager): State(stateManager) {
     init {
         Gdx.input.setInputProcessor(stage)
         table.left().bottom()
-        // task1Img.setSize((viewport.screenWidth / 2).toFloat(), (viewport.screenHeight / 2).toFloat())
         task1Img.addListener(object : ClickListener() {
             override fun clicked(event: InputEvent?, x: Float, y: Float) {
                 stateManager.set(PlayState1(stateManager))
             }
         })
-        // task2Img.setSize((viewport.screenWidth / 2).toFloat(), (viewport.screenHeight / 2).toFloat())
         task2Img.addListener(object : ClickListener() {
             override fun clicked(event: InputEvent?, x: Float, y: Float) {
                 stateManager.set(PlayState2(stateManager))
             }
         })
-        // task3Img.setSize((viewport.screenWidth / 2).toFloat(), (viewport.screenHeight / 2).toFloat())
         task3Img.addListener(object : ClickListener() {
             override fun clicked(event: InputEvent?, x: Float, y: Float) {
                 stateManager.set(PlayState3(stateManager))
             }
         })
-        // task4Img.setSize((viewport.screenWidth / 2).toFloat(), (viewport.screenHeight / 2).toFloat())
         task4Img.addListener(object : ClickListener() {
             override fun clicked(event: InputEvent?, x: Float, y: Float) {
                 // TODO: Change PlayState3 to PlayState4
                 stateManager.set(PlayState3(stateManager))
             }
         })
-        table.add(task1Img).size((viewport.screenWidth / 2).toFloat(), (viewport.screenHeight / 2).toFloat())
-        table.add(task2Img).size((viewport.screenWidth / 2).toFloat(), (viewport.screenHeight / 2).toFloat())
+        table.add(task1Img).size((HelicopterGame.WIDTH / 2), HelicopterGame.HEIGHT / 2)
+        table.add(task2Img).size((HelicopterGame.WIDTH / 2), HelicopterGame.HEIGHT / 2)
         table.row()
-        table.add(task3Img).size((viewport.screenWidth / 2).toFloat(), (viewport.screenHeight / 2).toFloat())
-        table.add(task4Img).size((viewport.screenWidth / 2).toFloat(), (viewport.screenHeight / 2).toFloat())
+        table.add(task3Img).size((HelicopterGame.WIDTH / 2), HelicopterGame.HEIGHT / 2)
+        table.add(task4Img).size((HelicopterGame.WIDTH / 2), HelicopterGame.HEIGHT / 2)
         stage.addActor(table)
     }
     override fun handleInput() {
