@@ -11,7 +11,7 @@ class Helicopter1(x: Float, y: Float) : Sprite() {
     }
     private var position: Vector3 = Vector3(x, y, 0F)
     private var velocity: Vector3 = Vector3(-SPEED, SPEED, 0F)
-    private var helicopter: Texture = Texture("attackhelicopter.png")
+    private var helicopter: Texture = Texture("attackhelicopter.PNG")
     fun update(deltaTime: Float) {
         velocity.scl(deltaTime)
         position.add(velocity.x, velocity.y, 0F)

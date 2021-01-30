@@ -16,7 +16,7 @@ class MenuState(stateManager: GameStateManager): State(stateManager) {
     private var playButton: Texture = Texture("playbutton.png")
     override fun handleInput() {
         if (Gdx.input.justTouched()) {
-            stateManager.set(PlayState1(stateManager))
+            stateManager.set(PlayState2(stateManager))
             dispose()
         }
     }

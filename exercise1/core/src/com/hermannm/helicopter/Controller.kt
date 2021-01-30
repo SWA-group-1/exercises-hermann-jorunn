@@ -10,10 +10,11 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.badlogic.gdx.utils.viewport.StretchViewport
 
 class Controller {
     val camera: OrthographicCamera = OrthographicCamera()
-    val viewport: Viewport = FitViewport(HelicopterGame.WIDTH, HelicopterGame.HEIGHT, camera)
+    val viewport: Viewport = StretchViewport(HelicopterGame.WIDTH, HelicopterGame.HEIGHT, camera)
     val stage: Stage = Stage(viewport, HelicopterGame.batch)
     val table: Table = Table()
     var upPressed: Boolean = false
