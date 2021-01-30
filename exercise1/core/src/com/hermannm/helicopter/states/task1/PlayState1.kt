@@ -60,7 +60,7 @@ class PlayState1(stateManager: GameStateManager): State(stateManager) {
         sprites.begin()
         sprites.draw(background, 0F, 0F, HelicopterGame.WIDTH, HelicopterGame.HEIGHT)
         sprites.draw(
-                helicopter1.getSprite(),
+                helicopter1.getTexture(),
                 helicopter1.getPosition().x,
                 helicopter1.getPosition().y
         )

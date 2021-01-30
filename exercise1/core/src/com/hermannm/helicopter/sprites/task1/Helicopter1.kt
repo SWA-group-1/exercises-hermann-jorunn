@@ -5,13 +5,13 @@ import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector3
 
-class Helicopter1(x: Float, y: Float) {
+class Helicopter1(x: Float, y: Float) : Sprite() {
     companion object {
         const val SPEED = 100F
     }
     private var position: Vector3 = Vector3(x, y, 0F)
     private var velocity: Vector3 = Vector3(-SPEED, SPEED, 0F)
-    private var chopper: Sprite = Sprite(Texture("attackhelicopter.png"))
+    private var helicopter: Texture = Texture("attackhelicopter.png")
     fun update(deltaTime: Float) {
         velocity.scl(deltaTime)
         position.add(velocity.x, velocity.y, 0F)
@@ -23,26 +23,23 @@ class Helicopter1(x: Float, y: Float) {
         }
         if (collisions[1]) {
             velocity.x = -SPEED
-            chopper.setFlip(false, false)
+            this.setFlip(false, false)
         }
         if (collisions[2]) {
             velocity.y = SPEED
         }
         if (collisions[3]) {
             velocity.x = SPEED
-            chopper.setFlip(true, false)
+            this.setFlip(true, false)
         }
     }
     fun getPosition(): Vector3 {
         return position
     }
-    fun getSprite(): Sprite {
-        return chopper
-    }
-    fun getTexture(): Texture {
-        return chopper.getTexture()
+    override fun getTexture(): Texture {
+        return helicopter
     }
     fun getBounds(): Rectangle {
-        return Rectangle(position.x, position.y, chopper.getWidth().toFloat(), chopper.getHeight().toFloat())
+        return Rectangle(position.x, position.y, helicopter.getWidth().toFloat(), helicopter.getHeight().toFloat())
     }
 }
