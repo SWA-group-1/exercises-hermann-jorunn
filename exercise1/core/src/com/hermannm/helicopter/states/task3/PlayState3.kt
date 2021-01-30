@@ -14,8 +14,7 @@ class PlayState3(stateManager: GameStateManager): State(stateManager) {
     init {
         camera.setToOrtho(false, HelicopterGame.WIDTH, HelicopterGame.HEIGHT)
     }
-    private var background: Texture = Texture("background.jpg")
-    val debugRenderer: Box2DDebugRenderer = Box2DDebugRenderer()
+    private val background: Texture = Texture("background.jpg")
     private val helicopters: Array<Helicopter3> = arrayOf(
             Helicopter3(150F, 100F),
             Helicopter3(300F, 350F),
@@ -45,9 +44,6 @@ class PlayState3(stateManager: GameStateManager): State(stateManager) {
             HelicopterGame.WIDTH - helicopters[0].getTexture().getWidth().toFloat(),
             HelicopterGame.HEIGHT
     )
-    override fun handleInput() {
-
-    }
     fun wallCollisions(helicopter: Helicopter3): Array<Boolean> {
         return arrayOf(
                 !(helicopter.getBounds().overlaps(topBound)),
@@ -56,7 +52,6 @@ class PlayState3(stateManager: GameStateManager): State(stateManager) {
                 !(helicopter.getBounds().overlaps(leftBound))
         )
     }
-
     //top, right, bottom, left
     fun helicopterCollisions(thisHelicopter: Helicopter3): Array<Boolean> {
         var array = arrayOf(false, false, false, false)
@@ -86,7 +81,6 @@ class PlayState3(stateManager: GameStateManager): State(stateManager) {
         }
         return array
     }
-
     override fun update(deltaTime: Float) {
         handleInput();
         for (helicopter in helicopters) {
@@ -109,5 +103,7 @@ class PlayState3(stateManager: GameStateManager): State(stateManager) {
         sprites.end()
     }
     override fun dispose() {
+        background.dispose()
     }
+    override fun handleInput() {}
 }

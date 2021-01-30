@@ -12,7 +12,7 @@ class PlayState1(stateManager: GameStateManager): State(stateManager) {
     init {
         camera.setToOrtho(false, HelicopterGame.WIDTH, HelicopterGame.HEIGHT)
     }
-    private var background: Texture = Texture("background.jpg")
+    private val background: Texture = Texture("background.jpg")
     private val helicopter1: Helicopter1 = Helicopter1(150F, 100F);
     private val topBound: Rectangle = Rectangle(
             0F, //chopper.getTexture().getWidth().toFloat(),
@@ -38,22 +38,17 @@ class PlayState1(stateManager: GameStateManager): State(stateManager) {
             HelicopterGame.WIDTH - helicopter1.getTexture().getWidth().toFloat(),
             HelicopterGame.HEIGHT
     )
-    override fun handleInput() {
-
-    }
     fun collisions(): Array<Boolean> {
-        var collisions = arrayOf(
-                !(helicopter1.getBounds().overlaps(topBound)),
-                !(helicopter1.getBounds().overlaps(rightBound)),
-                !(helicopter1.getBounds().overlaps(bottomBound)),
-                !(helicopter1.getBounds().overlaps(leftBound))
+        return arrayOf(
+            !(helicopter1.getBounds().overlaps(topBound)),
+            !(helicopter1.getBounds().overlaps(rightBound)),
+            !(helicopter1.getBounds().overlaps(bottomBound)),
+            !(helicopter1.getBounds().overlaps(leftBound))
         )
-        return collisions
     }
     override fun update(deltaTime: Float) {
-        handleInput();
         helicopter1.changeDirection(collisions())
-        helicopter1.update(deltaTime);
+        helicopter1.update(deltaTime)
     }
     override fun render(sprites: SpriteBatch) {
         sprites.setProjectionMatrix(camera.combined)
@@ -67,5 +62,7 @@ class PlayState1(stateManager: GameStateManager): State(stateManager) {
         sprites.end()
     }
     override fun dispose() {
+        background.dispose()
     }
+    override fun handleInput() {}
 }

@@ -9,9 +9,9 @@ class Helicopter2(x: Float, y: Float) {
     companion object {
         const val SPEED = 200F
     }
-    private var position: Vector3 = Vector3(x, y, 0F)
-    private var velocity: Vector3 = Vector3(0F, 0F, 0F)
-    private var chopper: Sprite = Sprite(Texture("attackhelicopter.PNG"))
+    private val position: Vector3 = Vector3(x, y, 0F)
+    private val velocity: Vector3 = Vector3(0F, 0F, 0F)
+    private val helicopter: Sprite = Sprite(Texture("attackhelicopter.PNG"))
     fun update(deltaTime: Float) {
         velocity.scl(deltaTime)
         position.add(velocity.x, velocity.y, 0F)
@@ -28,12 +28,12 @@ class Helicopter2(x: Float, y: Float) {
             y = 0
         }
         if (xMultiplier == 1) {
-            chopper.setFlip(true, false)
+            helicopter.setFlip(true, false)
             if (collisions[1]) {
                 x = 0
             }
         } else if (xMultiplier == -1) {
-            chopper.setFlip(false, false)
+            helicopter.setFlip(false, false)
             if (collisions[3]) {
                 x = 0
             }
@@ -45,12 +45,12 @@ class Helicopter2(x: Float, y: Float) {
         return position
     }
     fun getSprite(): Sprite {
-        return chopper
+        return helicopter
     }
     fun getTexture(): Texture {
-        return chopper.getTexture()
+        return helicopter.getTexture()
     }
     fun getBounds(): Rectangle {
-        return Rectangle(position.x, position.y, chopper.getWidth().toFloat(), chopper.getHeight().toFloat())
+        return Rectangle(position.x, position.y, helicopter.getWidth().toFloat(), helicopter.getHeight().toFloat())
     }
 }

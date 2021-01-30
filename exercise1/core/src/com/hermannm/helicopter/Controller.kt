@@ -84,7 +84,7 @@ class Controller {
     fun draw() {
         stage.draw()
     }
-    fun resize(width: Int, height: Int) {
-        viewport.update(width, height)
+    fun dispose() {
+        stage.dispose()
     }
 }

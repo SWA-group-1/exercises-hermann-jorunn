@@ -20,7 +20,7 @@ class HelicopterGame : ApplicationAdapter() {
     override fun create() {
         batch = SpriteBatch()
         stateManager = GameStateManager()
-        Gdx.gl.glClearColor(1F, 0F, 0F, 1F)
+        Gdx.gl.glClearColor(0F, 0F, 0F, 1F)
         stateManager?.push(MenuState(stateManager!!))
     }
     override fun render() {

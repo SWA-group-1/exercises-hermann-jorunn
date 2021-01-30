@@ -12,7 +12,7 @@ class GameStateManager {
         states.pop()
     }
     fun set(state: State) {
-        states.pop();
+        states.pop().dispose();
         states.push(state)
     }
     fun update(deltaTime: Float) {

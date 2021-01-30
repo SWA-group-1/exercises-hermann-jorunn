@@ -10,7 +10,6 @@ class Helicopter3(x: Float, y: Float) {
     companion object {
         const val SPEED = 100F
     }
-
     private val position: Vector3 = Vector3(x, y, 0F)
     private val velocity: Vector3 = Vector3(-SPEED, SPEED, 0F)
     private val helicopterTextures: Array<Texture> = arrayOf(

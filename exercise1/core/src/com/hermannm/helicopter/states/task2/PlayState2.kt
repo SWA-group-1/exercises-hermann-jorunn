@@ -13,11 +13,11 @@ class PlayState2(stateManager: GameStateManager): State(stateManager) {
     init {
         camera.setToOrtho(false, HelicopterGame.WIDTH, HelicopterGame.HEIGHT)
     }
-    private var background: Texture = Texture("background.jpg")
+    private val background: Texture = Texture("background.jpg")
     private val helicopter2: Helicopter2 = Helicopter2(150F, 100F);
-    var controller: Controller = Controller()
+    private val controller: Controller = Controller()
     private val topBound: Rectangle = Rectangle(
-            0F, //chopper.getTexture().getWidth().toFloat(),
+            0F,
             0F,
             HelicopterGame.WIDTH,
             HelicopterGame.HEIGHT - helicopter2.getTexture().getHeight().toFloat()
@@ -79,5 +79,6 @@ class PlayState2(stateManager: GameStateManager): State(stateManager) {
         controller.draw()
     }
     override fun dispose() {
+        controller.dispose()
     }
 }

@@ -23,16 +23,14 @@ class MenuState(stateManager: GameStateManager): State(stateManager) {
     init {
         camera.setToOrtho(false, HelicopterGame.WIDTH, HelicopterGame.HEIGHT)
     }
-    private var background: Texture = Texture("background.jpg")
-    private var playButton: Texture = Texture("playbutton.png")
-    val viewport: Viewport = StretchViewport(HelicopterGame.WIDTH, HelicopterGame.HEIGHT, camera)
-    val stage: Stage = Stage(viewport, HelicopterGame.batch)
-    val table: Table = Table()
+    private val viewport: Viewport = StretchViewport(HelicopterGame.WIDTH, HelicopterGame.HEIGHT, camera)
+    private val stage: Stage = Stage(viewport, HelicopterGame.batch)
+    private val table: Table = Table()
     // TODO: Replace task images
-    val task1Img = Image(Texture("task1.png"))
-    val task2Img = Image(Texture("task2.png"))
-    val task3Img = Image(Texture("task3.png"))
-    val task4Img = Image(Texture("task4.png"))
+    private val task1Img = Image(Texture("task1.png"))
+    private val task2Img = Image(Texture("task2.png"))
+    private val task3Img = Image(Texture("task3.png"))
+    private val task4Img = Image(Texture("task4.png"))
     init {
         Gdx.input.setInputProcessor(stage)
         table.left().bottom()
@@ -64,20 +62,15 @@ class MenuState(stateManager: GameStateManager): State(stateManager) {
         table.add(task4Img).size((HelicopterGame.WIDTH / 2), HelicopterGame.HEIGHT / 2)
         stage.addActor(table)
     }
-    override fun handleInput() {
-    }
+    override fun handleInput() {}
     override fun update(deltaTime: Float) {
         handleInput()
     }
     override fun render(sprites: SpriteBatch) {
         sprites.setProjectionMatrix(camera.combined)
-        sprites.begin()
-        sprites.draw(background, 0F, 0F)
-        sprites.end()
         stage.draw()
     }
-    override fun dispose() {
-        background.dispose()
-        playButton.dispose()
+    override fun dispose(){
+        stage.dispose()
     }
 }
