@@ -21,7 +21,7 @@ class Helicopter3(x: Float, y: Float, val world: World) : Sprite() {
         Texture("heli4.png")
     )
     val helicopterWidth get() = helicopterTextures[0].getWidth()
-    val helicopterHeight get() = helicopterTextures[1].getHeight()
+    val helicopterHeight get() = helicopterTextures[0].getHeight()
     private val helicopterAnimation: Animation = Animation(
         helicopterTextures,
         0.5F
@@ -36,7 +36,7 @@ class Helicopter3(x: Float, y: Float, val world: World) : Sprite() {
     val bodyDef: BodyDef = BodyDef()
     init {
         bodyDef.position.set(position.x, position.y)
-        bodyDef. type = BodyDef.BodyType.DynamicBody
+        bodyDef.type = BodyDef.BodyType.DynamicBody
     }
     var body: Body = world.createBody(bodyDef)
     init {
