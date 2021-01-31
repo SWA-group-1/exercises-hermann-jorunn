@@ -10,7 +10,7 @@ class Helicopter3(x: Float, y: Float) {
     companion object {
         const val SPEED = 100F
     }
-    private val position: Vector3 = Vector3(x, y, 0F)
+    val position: Vector3 = Vector3(x, y, 0F)
     private val velocity: Vector3 = Vector3(-SPEED, SPEED, 0F)
     private val helicopterTextures: Array<TextureRegion> = arrayOf(
         TextureRegion(Texture("heli1.png")),
@@ -18,6 +18,8 @@ class Helicopter3(x: Float, y: Float) {
         TextureRegion(Texture("heli3.png")),
         TextureRegion(Texture("heli4.png"))
     )
+    val bounds: Rectangle
+        get() = Rectangle(position.x, position.y, getTexture().getTexture().getWidth().toFloat(), getTexture().getTexture().getHeight().toFloat())
     private val helicopterAnimation: Animation = Animation(
             helicopterTextures,
             0.5F
@@ -29,36 +31,27 @@ class Helicopter3(x: Float, y: Float) {
         velocity.scl(1 / deltaTime)
     }
 
-    fun changeDirection(collisions: Array<Boolean>) {
-        if (collisions[0]) {
+    fun changeDirection(collisions: HashMap<String, Boolean>) {
+        if (collisions["top"]!!) {
             velocity.y = -SPEED
         }
-        if (collisions[1]) {
+        if (collisions["right"]!!) {
             velocity.x = -SPEED
             if (getTexture().isFlipX) {
                 getTexture().flip(false, false)
             }
         }
-        if (collisions[2]) {
+        if (collisions["bottom"]!!) {
             velocity.y = SPEED
         }
-        if (collisions[3]) {
+        if (collisions["left"]!!) {
             velocity.x = SPEED
             if (!getTexture().isFlipX) {
                 getTexture().flip(true, false)
             }
         }
     }
-
-    fun getPosition(): Vector3 {
-        return position
-    }
-
     fun getTexture(): TextureRegion {
         return helicopterAnimation.getFrame()
-    }
-
-    fun getBounds(): Rectangle {
-        return Rectangle(position.x, position.y, getTexture().getTexture().getWidth().toFloat(), getTexture().getTexture().getHeight().toFloat())
     }
 }

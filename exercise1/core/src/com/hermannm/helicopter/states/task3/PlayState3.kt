@@ -18,66 +18,78 @@ class PlayState3(stateManager: GameStateManager): PlayState(stateManager) {
             Helicopter3(300F, 350F),
             Helicopter3(600F, 150F)
     )
-    private val topBound: Rectangle = Rectangle(
-            0F, //chopper.getTexture().getWidth().toFloat(),
-            0F,
-            HelicopterGame.WIDTH,
-            HelicopterGame.HEIGHT - helicopters[0].getTexture().getTexture().getHeight().toFloat()
-    )
-    private val rightBound: Rectangle = Rectangle(
-            0F,
-            0F,
-            HelicopterGame.WIDTH - helicopters[0].getTexture().getTexture().getWidth().toFloat(),
-            HelicopterGame.HEIGHT
-    )
-    private val bottomBound: Rectangle = Rectangle(
-            0F,
-            helicopters[0].getTexture().getTexture().getHeight().toFloat(),
-            HelicopterGame.WIDTH,
-            HelicopterGame.HEIGHT - helicopters[0].getTexture().getTexture().getHeight().toFloat()
-    )
-    private val leftBound: Rectangle = Rectangle(
-            helicopters[0].getTexture().getTexture().getWidth().toFloat(),
-            0F,
-            HelicopterGame.WIDTH - helicopters[0].getTexture().getTexture().getWidth().toFloat(),
-            HelicopterGame.HEIGHT
-    )
-    fun wallCollisions(helicopter: Helicopter3): Array<Boolean> {
-        return arrayOf(
-                !(helicopter.getBounds().overlaps(topBound)),
-                !(helicopter.getBounds().overlaps(rightBound)),
-                !(helicopter.getBounds().overlaps(bottomBound)),
-                !(helicopter.getBounds().overlaps(leftBound))
+    fun wallCollisions(helicopter: Helicopter3): HashMap<String, Boolean> {
+        return hashMapOf(
+            "top" to !helicopter.bounds.overlaps(Rectangle(
+                0F, //chopper.getTexture().getWidth().toFloat(),
+                0F,
+                HelicopterGame.WIDTH,
+                HelicopterGame.HEIGHT - helicopter.getTexture().getTexture().getHeight()
+            )),
+            "right" to !helicopter.bounds.overlaps(Rectangle(
+                    0F, //chopper.getTexture().getWidth().toFloat(),
+                    0F,
+                    HelicopterGame.WIDTH,
+                    HelicopterGame.HEIGHT - helicopter.getTexture().getTexture().getHeight()
+            )),
+            "bottom" to !helicopter.bounds.overlaps(Rectangle(
+                    0F, //chopper.getTexture().getWidth().toFloat(),
+                    0F,
+                    HelicopterGame.WIDTH,
+                    HelicopterGame.HEIGHT - helicopter.getTexture().getTexture().getHeight()
+            )),
+            "left" to !helicopter.bounds.overlaps(Rectangle(
+                    0F, //chopper.getTexture().getWidth().toFloat(),
+                    0F,
+                    HelicopterGame.WIDTH,
+                    HelicopterGame.HEIGHT - helicopter.getTexture().getTexture().getHeight()
+            ))
         )
     }
     //top, right, bottom, left
-    fun helicopterCollisions(thisHelicopter: Helicopter3): Array<Boolean> {
-        var array = arrayOf(false, false, false, false)
-        var thisx: Float = thisHelicopter.getPosition().x
-        var thisy: Float = thisHelicopter.getPosition().y
+    fun helicopterCollisions(thisHelicopter: Helicopter3): HashMap<String, Boolean> {
+        val collisions: HashMap<String, Boolean> = hashMapOf(
+            "top" to false,
+            "right" to false,
+            "bottom" to false,
+            "left" to false
+        )
+        var thisx: Float = thisHelicopter.position.x
+        var thisy: Float = thisHelicopter.position.y
         var height: Float = thisHelicopter.getTexture().getTexture().getHeight().toFloat()
         var width: Float = thisHelicopter.getTexture().getTexture().getWidth().toFloat()
         for (helicopter in helicopters) {
-            if(thisHelicopter != helicopter && thisHelicopter.getBounds().overlaps(helicopter.getBounds())) {
-                var xOverlap: Float = 0.toFloat()
-                var yOverlap: Float = 0.toFloat()
-                var x: Float = helicopter.getPosition().x
-                var y: Float = helicopter.getPosition().y
-                if(thisx<x){ xOverlap = thisx-x+width }
-                else { xOverlap = x-thisx+width }
-                if(thisy<y){ yOverlap = thisy-y+height }
-                else { yOverlap = y-thisy+height }
-                if (xOverlap>yOverlap){
-                    if(thisy<y){ array[0]= true }
-                    else{ array[2]= true }
+            if(thisHelicopter != helicopter && thisHelicopter.bounds.overlaps(helicopter.bounds)) {
+                var xOverlap: Float
+                var yOverlap: Float
+                var x: Float = helicopter.position.x
+                var y: Float = helicopter.position.y
+                if (thisx < x) {
+                    xOverlap = thisx - x + width
+                } else {
+                    xOverlap = x - thisx + width
                 }
-                else{
-                    if(thisx<x){ array[1]=true }
-                    else{ array[3]= true }
+                if (thisy < y) {
+                    yOverlap = thisy - y + height
+                } else {
+                    yOverlap = y - thisy + height
+                }
+                if (xOverlap > yOverlap){
+                    if (thisy < y) {
+                        collisions["top"] = true
+                    } else {
+                        collisions["bottom"] = true
+                    }
+                } else {
+                    if (thisx < x) {
+                        collisions["right"] = true
+                    } else {
+                        collisions["left"] = true
+                    }
                 }
             }
         }
-        return array
+        return collisions
     }
     override fun update(deltaTime: Float) {
         handleInput();
@@ -94,8 +106,8 @@ class PlayState3(stateManager: GameStateManager): PlayState(stateManager) {
         for (helicopter in helicopters) {
             sprites.draw(
                     helicopter.getTexture(),
-                    helicopter.getPosition().x,
-                    helicopter.getPosition().y
+                    helicopter.position.x,
+                    helicopter.position.y
             )
         }
         sprites.end()
