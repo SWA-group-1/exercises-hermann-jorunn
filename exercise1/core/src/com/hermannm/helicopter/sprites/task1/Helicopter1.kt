@@ -20,18 +20,18 @@ class Helicopter1(x: Float, y: Float) {
         position.add(velocity.x, velocity.y, 0F)
         velocity.scl(1/deltaTime)
     }
-    fun changeDirection(collisions: Array<Boolean>) {
-        if (collisions[0]) {
+    fun changeDirection(topCollision: Boolean, rightCollision: Boolean, bottomCollision: Boolean, leftCollision: Boolean) {
+        if (topCollision) {
             velocity.y = -SPEED
         }
-        if (collisions[1]) {
+        if (rightCollision) {
             velocity.x = -SPEED
             sprite.setFlip(false, false)
         }
-        if (collisions[2]) {
+        if (bottomCollision) {
             velocity.y = SPEED
         }
-        if (collisions[3]) {
+        if (leftCollision) {
             velocity.x = SPEED
             sprite.setFlip(true, false)
         }

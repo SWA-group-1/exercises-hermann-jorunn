@@ -20,34 +20,34 @@ class PlayState1(stateManager: GameStateManager): PlayState(stateManager) {
             HelicopterGame.WIDTH,
             HelicopterGame.HEIGHT - helicopter1.sprite.getHeight()
     )
+    val topCollision: Boolean
+        get() = !(helicopter1.bounds.overlaps(topBound))
     private val rightBound: Rectangle = Rectangle(
             0F,
             0F,
             HelicopterGame.WIDTH - helicopter1.sprite.getWidth(),
             HelicopterGame.HEIGHT
     )
+    val rightCollision: Boolean
+        get() = !(helicopter1.bounds.overlaps(rightBound))
     private val bottomBound: Rectangle = Rectangle(
             0F,
             helicopter1.sprite.getHeight(),
             HelicopterGame.WIDTH,
-            HelicopterGame.HEIGHT - helicopter1.sprite.getHeight().toFloat()
+            HelicopterGame.HEIGHT - helicopter1.sprite.getHeight()
     )
+    val bottomCollision: Boolean
+        get() = !(helicopter1.bounds.overlaps(bottomBound))
     private val leftBound: Rectangle = Rectangle(
-            helicopter1.sprite.getTexture().getWidth().toFloat(),
+            helicopter1.sprite.getWidth(),
             0F,
-            HelicopterGame.WIDTH - helicopter1.sprite.getTexture().getWidth().toFloat(),
+            HelicopterGame.WIDTH - helicopter1.sprite.getWidth(),
             HelicopterGame.HEIGHT
     )
-    fun collisions(): Array<Boolean> {
-        return arrayOf(
-            !(helicopter1.bounds.overlaps(topBound)),
-            !(helicopter1.bounds.overlaps(rightBound)),
-            !(helicopter1.bounds.overlaps(bottomBound)),
-            !(helicopter1.bounds.overlaps(leftBound))
-        )
-    }
+    val leftCollision: Boolean
+        get() = !(helicopter1.bounds.overlaps(leftBound))
     override fun update(deltaTime: Float) {
-        helicopter1.changeDirection(collisions())
+        helicopter1.changeDirection(topCollision, rightCollision, bottomCollision, leftCollision)
         helicopter1.update(deltaTime)
     }
     override fun render(sprites: SpriteBatch) {
