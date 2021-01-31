@@ -15,6 +15,7 @@ import com.hermannm.helicopter.HelicopterGame
 import com.hermannm.helicopter.states.task1.PlayState1
 import com.hermannm.helicopter.states.task2.PlayState2
 import com.hermannm.helicopter.states.task3.PlayState3
+import com.hermannm.helicopter.states.task4.PlayState4
 
 class MenuState(stateManager: GameStateManager): State(stateManager) {
     init {
@@ -51,8 +52,7 @@ class MenuState(stateManager: GameStateManager): State(stateManager) {
         })
         task4Img.addListener(object : ClickListener() {
             override fun clicked(event: InputEvent?, x: Float, y: Float) {
-                // TODO: Change PlayState3 to PlayState4
-                stateManager.set(PlayState3(stateManager))
+                stateManager.set(PlayState4(stateManager))
             }
         })
         table.add(task1Img).size((HelicopterGame.WIDTH / 2), HelicopterGame.HEIGHT / 2)

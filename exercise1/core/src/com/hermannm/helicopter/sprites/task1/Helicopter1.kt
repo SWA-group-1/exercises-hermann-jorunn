@@ -32,6 +32,7 @@ class Helicopter1(x: Float, y: Float) : Sprite(Texture("attackhelicopter.PNG")) 
             setFlip(true, false)
         }
     }
+
     fun getPosition(): Vector3 {
         return position
     }
