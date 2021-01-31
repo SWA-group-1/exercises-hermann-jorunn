@@ -22,24 +22,24 @@ class PlayState3(stateManager: GameStateManager): PlayState(stateManager) {
             0F, //chopper.getTexture().getWidth().toFloat(),
             0F,
             HelicopterGame.WIDTH,
-            HelicopterGame.HEIGHT - helicopters[0].getTexture().getHeight().toFloat()
+            HelicopterGame.HEIGHT - helicopters[0].getTexture().getTexture().getHeight().toFloat()
     )
     private val rightBound: Rectangle = Rectangle(
             0F,
             0F,
-            HelicopterGame.WIDTH - helicopters[0].getTexture().getWidth().toFloat(),
+            HelicopterGame.WIDTH - helicopters[0].getTexture().getTexture().getWidth().toFloat(),
             HelicopterGame.HEIGHT
     )
     private val bottomBound: Rectangle = Rectangle(
             0F,
-            helicopters[0].getTexture().getHeight().toFloat(),
+            helicopters[0].getTexture().getTexture().getHeight().toFloat(),
             HelicopterGame.WIDTH,
-            HelicopterGame.HEIGHT - helicopters[0].getTexture().getHeight().toFloat()
+            HelicopterGame.HEIGHT - helicopters[0].getTexture().getTexture().getHeight().toFloat()
     )
     private val leftBound: Rectangle = Rectangle(
-            helicopters[0].getTexture().getWidth().toFloat(),
+            helicopters[0].getTexture().getTexture().getWidth().toFloat(),
             0F,
-            HelicopterGame.WIDTH - helicopters[0].getTexture().getWidth().toFloat(),
+            HelicopterGame.WIDTH - helicopters[0].getTexture().getTexture().getWidth().toFloat(),
             HelicopterGame.HEIGHT
     )
     fun wallCollisions(helicopter: Helicopter3): Array<Boolean> {
@@ -55,8 +55,8 @@ class PlayState3(stateManager: GameStateManager): PlayState(stateManager) {
         var array = arrayOf(false, false, false, false)
         var thisx: Float = thisHelicopter.getPosition().x
         var thisy: Float = thisHelicopter.getPosition().y
-        var height: Float = thisHelicopter.getTexture().getHeight().toFloat()
-        var width: Float = thisHelicopter.getTexture().getWidth().toFloat()
+        var height: Float = thisHelicopter.getTexture().getTexture().getHeight().toFloat()
+        var width: Float = thisHelicopter.getTexture().getTexture().getWidth().toFloat()
         for (helicopter in helicopters) {
             if(thisHelicopter != helicopter && thisHelicopter.getBounds().overlaps(helicopter.getBounds())) {
                 var xOverlap: Float = 0.toFloat()

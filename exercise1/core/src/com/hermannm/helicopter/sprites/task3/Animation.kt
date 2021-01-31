@@ -1,8 +1,9 @@
 package com.hermannm.helicopter.sprites.task3
 
 import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.graphics.g2d.TextureRegion
 
-class Animation(private val frames: Array<Texture>, cycleTime: Float) {
+class Animation(private val frames: Array<TextureRegion>, cycleTime: Float) {
     private var frame: Int = 0
     private val maxFrameTime: Float = cycleTime / frames.size
     private var currentFrameTime: Float = 0F
@@ -16,7 +17,7 @@ class Animation(private val frames: Array<Texture>, cycleTime: Float) {
             frame = 0
         }
     }
-    fun getFrame(): Texture {
+    fun getFrame(): TextureRegion {
         return frames[frame]
     }
 }

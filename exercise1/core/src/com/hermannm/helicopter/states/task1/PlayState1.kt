@@ -18,32 +18,32 @@ class PlayState1(stateManager: GameStateManager): PlayState(stateManager) {
             0F, //chopper.getTexture().getWidth().toFloat(),
             0F,
             HelicopterGame.WIDTH,
-            HelicopterGame.HEIGHT - helicopter1.getTexture().getHeight().toFloat()
+            HelicopterGame.HEIGHT - helicopter1.sprite.getHeight()
     )
     private val rightBound: Rectangle = Rectangle(
             0F,
             0F,
-            HelicopterGame.WIDTH - helicopter1.getTexture().getWidth().toFloat(),
+            HelicopterGame.WIDTH - helicopter1.sprite.getWidth(),
             HelicopterGame.HEIGHT
     )
     private val bottomBound: Rectangle = Rectangle(
             0F,
-            helicopter1.getTexture().getHeight().toFloat(),
+            helicopter1.sprite.getHeight(),
             HelicopterGame.WIDTH,
-            HelicopterGame.HEIGHT - helicopter1.getTexture().getHeight().toFloat()
+            HelicopterGame.HEIGHT - helicopter1.sprite.getHeight().toFloat()
     )
     private val leftBound: Rectangle = Rectangle(
-            helicopter1.getTexture().getWidth().toFloat(),
+            helicopter1.sprite.getTexture().getWidth().toFloat(),
             0F,
-            HelicopterGame.WIDTH - helicopter1.getTexture().getWidth().toFloat(),
+            HelicopterGame.WIDTH - helicopter1.sprite.getTexture().getWidth().toFloat(),
             HelicopterGame.HEIGHT
     )
     fun collisions(): Array<Boolean> {
         return arrayOf(
-            !(helicopter1.getBounds().overlaps(topBound)),
-            !(helicopter1.getBounds().overlaps(rightBound)),
-            !(helicopter1.getBounds().overlaps(bottomBound)),
-            !(helicopter1.getBounds().overlaps(leftBound))
+            !(helicopter1.bounds.overlaps(topBound)),
+            !(helicopter1.bounds.overlaps(rightBound)),
+            !(helicopter1.bounds.overlaps(bottomBound)),
+            !(helicopter1.bounds.overlaps(leftBound))
         )
     }
     override fun update(deltaTime: Float) {
@@ -55,9 +55,9 @@ class PlayState1(stateManager: GameStateManager): PlayState(stateManager) {
         sprites.begin()
         sprites.draw(background, 0F, 0F, HelicopterGame.WIDTH, HelicopterGame.HEIGHT)
         sprites.draw(
-                helicopter1.getTexture(),
-                helicopter1.getPosition().x,
-                helicopter1.getPosition().y
+                helicopter1.sprite,
+                helicopter1.position.x,
+                helicopter1.position.y
         )
         sprites.end()
         super.render(sprites)

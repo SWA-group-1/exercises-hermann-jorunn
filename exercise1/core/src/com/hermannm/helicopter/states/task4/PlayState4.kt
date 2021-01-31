@@ -10,9 +10,10 @@ import com.hermannm.helicopter.sprites.task4.Helicopter4
 import com.hermannm.helicopter.states.GameStateManager
 import com.hermannm.helicopter.states.State
 import com.hermannm.helicopter.sprites.task4.Paddle
+import com.hermannm.helicopter.states.PlayState
 
 
-class PlayState4(stateManager: GameStateManager): State(stateManager) {
+class PlayState4(stateManager: GameStateManager): PlayState(stateManager) {
     init {
         camera.setToOrtho(false, HelicopterGame.WIDTH, HelicopterGame.HEIGHT)
     }
@@ -129,7 +130,9 @@ class PlayState4(stateManager: GameStateManager): State(stateManager) {
                 comPaddle.getPosition().y
         )
         sprites.end()
+        super.render(sprites)
     }
     override fun dispose() {
+        super.dispose()
     }
 }
