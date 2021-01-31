@@ -186,7 +186,9 @@ class PlayState4(stateManager: GameStateManager): PlayState(stateManager) {
         )
         font.draw(sprites, scores[1].toString(), 200F, HelicopterGame.HEIGHT -20F)
         font.draw(sprites, scores[0].toString(), HelicopterGame.WIDTH -200F, HelicopterGame.HEIGHT -20F)
-        font.draw(sprites, text, 130F, 200F)
+        if(text!=""){
+            font.draw(sprites, text, 130F, 200F)
+        }
         sprites.end()
         super.render(sprites)
     }
