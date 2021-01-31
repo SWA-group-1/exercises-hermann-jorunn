@@ -18,7 +18,7 @@ class Helicopter3(x: Float, y: Float) {
         TextureRegion(Texture("heli3.png")),
         TextureRegion(Texture("heli4.png"))
     )
-    private val animation: Animation = Animation(textures, 0.5F)
+    private val animation: Animation = Animation(textures, 0.1F)
     val sprite: Sprite = Sprite(animation.frame)
     private var flipped: Boolean = false
     fun update(deltaTime: Float) {
