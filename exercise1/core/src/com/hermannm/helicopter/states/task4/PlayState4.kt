@@ -17,19 +17,19 @@ class PlayState4(stateManager: GameStateManager): PlayState(stateManager) {
         camera.setToOrtho(false, HelicopterGame.WIDTH, HelicopterGame.HEIGHT)
     }
     private var background: Texture = Texture("background.jpg")
-    private val helicopter: Helicopter4 = Helicopter4(150F, 100F);
-    private val winningScore: Int = 21;
-    private val playerPaddle: Paddle = Paddle(HelicopterGame.WIDTH-50F, 125.5F);
+    private val helicopter: Helicopter4 = Helicopter4(150F, 100F)
+    private val winningScore: Int = 21
+    private val playerPaddle: Paddle = Paddle(HelicopterGame.WIDTH-50F, 125.5F)
     private val comPaddle: Paddle = Paddle(50F, 125.5F)
     private val font: BitmapFont = BitmapFont()
-    private var text: String = "";
+    private var text: String = ""
     init {
         font.data.scale(2f)
     }
     // [playerScore, comScore]
     private var scores: Array<Int> = arrayOf(0,0);
     private val topBound: Rectangle = Rectangle(
-            0F, //chopper.getTexture().getWidth().toFloat(),
+            0F,
             0F,
             HelicopterGame.WIDTH,
             HelicopterGame.HEIGHT - helicopter.sprite.height
@@ -41,7 +41,7 @@ class PlayState4(stateManager: GameStateManager): PlayState(stateManager) {
             HelicopterGame.HEIGHT - helicopter.sprite.height
     )
     private val topPaddleBound: Rectangle = Rectangle(
-            0F, //chopper.getTexture().getWidth().toFloat(),
+            0F,
             0F,
             HelicopterGame.WIDTH,
             HelicopterGame.HEIGHT - playerPaddle.texture.height.toFloat()
@@ -59,15 +59,15 @@ class PlayState4(stateManager: GameStateManager): PlayState(stateManager) {
         )
     }
     override fun handleInput() {
-        if (Gdx.input.isTouched) {
+        if (Gdx.input.justTouched()) {
             if (helicopter.velocity.x == 0F && helicopter.velocity.y == 0F){
                 helicopter.setVelocity(arrayOf(-1F, 0.5F))
-                scores[0]=0;
-                scores[1]=0;
-                text = "";
+                scores[0]=0
+                scores[1]=0
+                text = ""
                 comPaddle.changeDirection(arrayOf(true,false))
             }
-            val y: Int = Gdx.input.getY();
+            val y: Int = Gdx.input.y;
             if(y>HelicopterGame.HEIGHT){
                 playerPaddle.changeDirection(arrayOf(false, true))
             }
@@ -77,11 +77,10 @@ class PlayState4(stateManager: GameStateManager): PlayState(stateManager) {
         }
     }
     private fun wallCollisions(): Array<Boolean> {
-        var collisions = arrayOf(
+        return arrayOf(
             !(helicopter.bounds.overlaps(topBound)),
             !(helicopter.bounds.overlaps(bottomBound))
         )
-        return collisions
     }
     private fun checkRoundFinished(): Boolean{
         if ((helicopter.position.x + helicopter.texture.width) < 0) {

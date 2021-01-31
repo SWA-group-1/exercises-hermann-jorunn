@@ -13,7 +13,7 @@ class Helicopter4(x: Float, y: Float) {
     }
     var position: Vector3 = Vector3(x, y, 0F)
     fun setPosition(x: Float, y: Float) {
-        position = Vector3(x, y, 0F);
+        position = Vector3(x, y, 0F)
     }
     private var yMultiplier: Float = 1F;
     var velocity: Vector3 = Vector3(-SPEED, SPEED, 0F)
