@@ -9,9 +9,11 @@ class Helicopter2(x: Float, y: Float) {
     companion object {
         const val SPEED = 200F
     }
-    private val position: Vector3 = Vector3(x, y, 0F)
+    val position: Vector3 = Vector3(x, y, 0F)
     private val velocity: Vector3 = Vector3(0F, 0F, 0F)
-    private val helicopter: Sprite = Sprite(Texture("attackhelicopter.PNG"))
+    val bounds: Rectangle
+        get() = Rectangle(position.x, position.y, sprite.width, sprite.height)
+    val sprite: Sprite = Sprite(Texture("attackhelicopter.PNG"))
     fun update(deltaTime: Float) {
         velocity.scl(deltaTime)
         position.add(velocity.x, velocity.y, 0F)
@@ -19,38 +21,26 @@ class Helicopter2(x: Float, y: Float) {
     }
     // xMultiplier: 1 / -1 / 0, yMultiplier: 1 / -1 / 0
     // collisions: [top, right, bottom, left]
-    fun control(xMultiplier: Int, yMultiplier: Int, collisions: Array<Boolean>) {
+    fun control(xMultiplier: Int, yMultiplier: Int, collisions: HashMap<String, Boolean>) {
         var x = xMultiplier
         var y = yMultiplier
-        if (yMultiplier == 1 && collisions[0]) {
+        if (yMultiplier == 1 && collisions["top"]!!) {
             y = 0
-        } else if (yMultiplier == -1 && collisions[2]) {
+        } else if (yMultiplier == -1 && collisions["bottom"]!!) {
             y = 0
         }
         if (xMultiplier == 1) {
-            helicopter.setFlip(true, false)
-            if (collisions[1]) {
+            sprite.setFlip(true, false)
+            if (collisions["right"]!!) {
                 x = 0
             }
         } else if (xMultiplier == -1) {
-            helicopter.setFlip(false, false)
-            if (collisions[3]) {
+            sprite.setFlip(false, false)
+            if (collisions["left"]!!) {
                 x = 0
             }
         }
         velocity.x = SPEED * x
         velocity.y = SPEED * y
-    }
-    fun getPosition(): Vector3 {
-        return position
-    }
-    fun getSprite(): Sprite {
-        return helicopter
-    }
-    fun getTexture(): Texture {
-        return helicopter.getTexture()
-    }
-    fun getBounds(): Rectangle {
-        return Rectangle(position.x, position.y, helicopter.getWidth().toFloat(), helicopter.getHeight().toFloat())
     }
 }

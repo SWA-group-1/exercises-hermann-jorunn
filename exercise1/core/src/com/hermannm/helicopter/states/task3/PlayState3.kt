@@ -18,36 +18,35 @@ class PlayState3(stateManager: GameStateManager): PlayState(stateManager) {
             Helicopter3(300F, 350F),
             Helicopter3(600F, 150F)
     )
-    fun wallCollisions(helicopter: Helicopter3): HashMap<String, Boolean> {
+    private fun wallCollisions(helicopter: Helicopter3): HashMap<String, Boolean> {
         return hashMapOf(
             "top" to !helicopter.bounds.overlaps(Rectangle(
                 0F,
                 0F,
                 HelicopterGame.WIDTH,
-                HelicopterGame.HEIGHT - helicopter.sprite.getHeight()
+                HelicopterGame.HEIGHT - helicopter.sprite.height
             )),
             "right" to !helicopter.bounds.overlaps(Rectangle(
                     0F,
                     0F,
-                    HelicopterGame.WIDTH - helicopter.sprite.getWidth(),
+                    HelicopterGame.WIDTH - helicopter.sprite.width,
                     HelicopterGame.HEIGHT
             )),
             "bottom" to !helicopter.bounds.overlaps(Rectangle(
                     0F,
-                    helicopter.sprite.getHeight(),
+                    helicopter.sprite.height,
                     HelicopterGame.WIDTH,
-                    HelicopterGame.HEIGHT - helicopter.sprite.getHeight()
+                    HelicopterGame.HEIGHT - helicopter.sprite.height
             )),
             "left" to !helicopter.bounds.overlaps(Rectangle(
-                    helicopter.sprite.getWidth(),
+                    helicopter.sprite.width,
                     0F,
-                    HelicopterGame.WIDTH - helicopter.sprite.getWidth(),
+                    HelicopterGame.WIDTH - helicopter.sprite.width,
                     HelicopterGame.HEIGHT
             ))
         )
     }
-    //top, right, bottom, left
-    fun helicopterCollisions(thisHelicopter: Helicopter3): HashMap<String, Boolean> {
+    private fun helicopterCollisions(thisHelicopter: Helicopter3): HashMap<String, Boolean> {
         val collisions: HashMap<String, Boolean> = hashMapOf(
             "top" to false,
             "right" to false,
@@ -56,8 +55,8 @@ class PlayState3(stateManager: GameStateManager): PlayState(stateManager) {
         )
         val thisX: Float = thisHelicopter.position.x
         val thisY: Float = thisHelicopter.position.y
-        val thisHeight: Float = thisHelicopter.sprite.getHeight()
-        val thisWidth: Float = thisHelicopter.sprite.getWidth()
+        val thisHeight: Float = thisHelicopter.sprite.height
+        val thisWidth: Float = thisHelicopter.sprite.width
         for (helicopter in helicopters) {
             if(thisHelicopter != helicopter && thisHelicopter.bounds.overlaps(helicopter.bounds)) {
                 val x: Float = helicopter.position.x
@@ -98,7 +97,7 @@ class PlayState3(stateManager: GameStateManager): PlayState(stateManager) {
         }
     }
     override fun render(sprites: SpriteBatch) {
-        sprites.setProjectionMatrix(camera.combined)
+        sprites.projectionMatrix = camera.combined
         sprites.begin()
         sprites.draw(background, 0F, 0F, HelicopterGame.WIDTH, HelicopterGame.HEIGHT)
         for (helicopter in helicopters) {

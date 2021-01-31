@@ -24,14 +24,13 @@ class MenuState(stateManager: GameStateManager): State(stateManager) {
     private val viewport: Viewport = StretchViewport(HelicopterGame.WIDTH, HelicopterGame.HEIGHT, camera)
     private val stage: Stage = Stage(viewport, HelicopterGame.batch)
     private val table: Table = Table()
-    // TODO: Replace task images
     private val task1Img = Image(Texture("task1.png"))
     private val task2Img = Image(Texture("task2.png"))
     private val task3Img = Image(Texture("task3.png"))
     private val task4Img = Image(Texture("task4.png"))
     init {
-        val inputMultiplexer: InputMultiplexer = Gdx.input.getInputProcessor() as InputMultiplexer;
-        if (!inputMultiplexer.getProcessors().contains(stage)) {
+        val inputMultiplexer: InputMultiplexer = Gdx.input.inputProcessor as InputMultiplexer;
+        if (!inputMultiplexer.processors.contains(stage)) {
             inputMultiplexer.addProcessor(stage);
         }
         table.left().bottom()
@@ -67,7 +66,7 @@ class MenuState(stateManager: GameStateManager): State(stateManager) {
         handleInput()
     }
     override fun render(sprites: SpriteBatch) {
-        sprites.setProjectionMatrix(camera.combined)
+        sprites.projectionMatrix = camera.combined
         stage.draw()
     }
     override fun dispose(){

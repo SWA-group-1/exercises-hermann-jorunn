@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector3
+import com.hermannm.helicopter.sprites.task3.Helicopter3
 
 class Helicopter1(x: Float, y: Float) {
     companion object {
@@ -14,24 +15,24 @@ class Helicopter1(x: Float, y: Float) {
     val position: Vector3 = Vector3(x, y, 0F)
     private val velocity: Vector3 = Vector3(-SPEED, SPEED, 0F)
     val bounds: Rectangle
-        get() = Rectangle(position.x, position.y, sprite.getWidth(), sprite.getHeight())
+        get() = Rectangle(position.x, position.y, sprite.width, sprite.height)
     fun update(deltaTime: Float) {
         velocity.scl(deltaTime)
         position.add(velocity.x, velocity.y, 0F)
         velocity.scl(1/deltaTime)
     }
-    fun changeDirection(topCollision: Boolean, rightCollision: Boolean, bottomCollision: Boolean, leftCollision: Boolean) {
-        if (topCollision) {
+    fun changeDirection(collisions: HashMap<String, Boolean>) {
+        if (collisions["top"]!!) {
             velocity.y = -SPEED
         }
-        if (rightCollision) {
+        if (collisions["right"]!!) {
             velocity.x = -SPEED
             sprite.setFlip(false, false)
         }
-        if (bottomCollision) {
+        if (collisions["bottom"]!!) {
             velocity.y = SPEED
         }
-        if (leftCollision) {
+        if (collisions["left"]!!) {
             velocity.x = SPEED
             sprite.setFlip(true, false)
         }

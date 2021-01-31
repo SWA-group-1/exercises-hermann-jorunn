@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.math.Rectangle
 import com.hermannm.helicopter.HelicopterGame
 import com.hermannm.helicopter.sprites.task1.Helicopter1
+import com.hermannm.helicopter.sprites.task3.Helicopter3
 import com.hermannm.helicopter.states.GameStateManager
 import com.hermannm.helicopter.states.PlayState
 
@@ -14,44 +15,40 @@ class PlayState1(stateManager: GameStateManager): PlayState(stateManager) {
     }
     private val background: Texture = Texture("background.jpg")
     private val helicopter1: Helicopter1 = Helicopter1(150F, 100F);
-    private val topBound: Rectangle = Rectangle(
-            0F, //chopper.getTexture().getWidth().toFloat(),
-            0F,
-            HelicopterGame.WIDTH,
-            HelicopterGame.HEIGHT - helicopter1.sprite.getHeight()
-    )
-    val topCollision: Boolean
-        get() = !(helicopter1.bounds.overlaps(topBound))
-    private val rightBound: Rectangle = Rectangle(
-            0F,
-            0F,
-            HelicopterGame.WIDTH - helicopter1.sprite.getWidth(),
-            HelicopterGame.HEIGHT
-    )
-    val rightCollision: Boolean
-        get() = !(helicopter1.bounds.overlaps(rightBound))
-    private val bottomBound: Rectangle = Rectangle(
-            0F,
-            helicopter1.sprite.getHeight(),
-            HelicopterGame.WIDTH,
-            HelicopterGame.HEIGHT - helicopter1.sprite.getHeight()
-    )
-    val bottomCollision: Boolean
-        get() = !(helicopter1.bounds.overlaps(bottomBound))
-    private val leftBound: Rectangle = Rectangle(
-            helicopter1.sprite.getWidth(),
-            0F,
-            HelicopterGame.WIDTH - helicopter1.sprite.getWidth(),
-            HelicopterGame.HEIGHT
-    )
-    val leftCollision: Boolean
-        get() = !(helicopter1.bounds.overlaps(leftBound))
+    private fun wallCollisions(helicopter: Helicopter1): HashMap<String, Boolean> {
+        return hashMapOf(
+                "top" to !helicopter.bounds.overlaps(Rectangle(
+                        0F,
+                        0F,
+                        HelicopterGame.WIDTH,
+                        HelicopterGame.HEIGHT - helicopter.sprite.height
+                )),
+                "right" to !helicopter.bounds.overlaps(Rectangle(
+                        0F,
+                        0F,
+                        HelicopterGame.WIDTH - helicopter.sprite.width,
+                        HelicopterGame.HEIGHT
+                )),
+                "bottom" to !helicopter.bounds.overlaps(Rectangle(
+                        0F,
+                        helicopter.sprite.height,
+                        HelicopterGame.WIDTH,
+                        HelicopterGame.HEIGHT - helicopter.sprite.height
+                )),
+                "left" to !helicopter.bounds.overlaps(Rectangle(
+                        helicopter.sprite.width,
+                        0F,
+                        HelicopterGame.WIDTH - helicopter.sprite.width,
+                        HelicopterGame.HEIGHT
+                ))
+        )
+    }
     override fun update(deltaTime: Float) {
-        helicopter1.changeDirection(topCollision, rightCollision, bottomCollision, leftCollision)
+        helicopter1.changeDirection(wallCollisions(helicopter1))
         helicopter1.update(deltaTime)
     }
     override fun render(sprites: SpriteBatch) {
-        sprites.setProjectionMatrix(camera.combined)
+        sprites.projectionMatrix = camera.combined
         sprites.begin()
         sprites.draw(background, 0F, 0F, HelicopterGame.WIDTH, HelicopterGame.HEIGHT)
         sprites.draw(

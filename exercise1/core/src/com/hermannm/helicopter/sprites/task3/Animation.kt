@@ -4,20 +4,19 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 
 class Animation(private val frames: Array<TextureRegion>, cycleTime: Float) {
-    private var frame: Int = 0
+    private var frameIndex: Int = 0
+    val frame: TextureRegion
+        get() = frames[frameIndex]
     private val maxFrameTime: Float = cycleTime / frames.size
     private var currentFrameTime: Float = 0F
     fun update(deltaTime: Float) {
         currentFrameTime += deltaTime
         if (currentFrameTime > maxFrameTime) {
-            frame++
+            frameIndex
             currentFrameTime = 0F
         }
-        if (frame >= frames.size) {
-            frame = 0
+        if (frameIndex >= frames.size) {
+            frameIndex = 0
         }
-    }
-    fun getFrame(): TextureRegion {
-        return frames[frame]
     }
 }
