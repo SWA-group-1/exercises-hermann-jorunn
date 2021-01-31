@@ -7,6 +7,7 @@ import com.hermannm.helicopter.HelicopterGame
 import com.hermannm.helicopter.states.task1.PlayState1
 import com.hermannm.helicopter.states.task2.PlayState2
 import com.hermannm.helicopter.states.task3.PlayState3
+import com.hermannm.helicopter.states.task4.PlayState4
 
 class MenuState(stateManager: GameStateManager): State(stateManager) {
     init {
@@ -16,7 +17,7 @@ class MenuState(stateManager: GameStateManager): State(stateManager) {
     private var playButton: Texture = Texture("playbutton.png")
     override fun handleInput() {
         if (Gdx.input.justTouched()) {
-            stateManager.set(PlayState2(stateManager))
+            stateManager.set(PlayState4(stateManager))
             dispose()
         }
     }

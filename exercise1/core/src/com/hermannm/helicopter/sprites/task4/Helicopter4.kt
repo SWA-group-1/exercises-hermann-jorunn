@@ -1,15 +1,18 @@
-package com.hermannm.helicopter.sprites.task1
+package com.hermannm.helicopter.sprites.task4
 
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector3
+import com.hermannm.helicopter.sprites.task1.Helicopter1
+import kotlin.math.abs
 
-class Helicopter1(x: Float, y: Float) : Sprite() {
+class Helicopter4(x: Float, y: Float) : Sprite() {
     companion object {
-        const val SPEED = 100F
+        const val SPEED = 200F
     }
     private var position: Vector3 = Vector3(x, y, 0F)
+    private var yMultiplier: Float = 1F;
     private var velocity: Vector3 = Vector3(-SPEED, SPEED, 0F)
     private var helicopter: Texture = Texture("attackhelicopter.PNG")
     fun update(deltaTime: Float) {
@@ -31,6 +34,21 @@ class Helicopter1(x: Float, y: Float) : Sprite() {
         if (collisions[3]) {
             velocity.x = SPEED
             this.setFlip(true, false)
+        }
+    }
+    //wallCollisions [top,bottom]
+    //multipliers[x,y]
+    fun changeVelocity(wallCollisions: Array<Boolean>, paddleCollision: Boolean, multipliers: Array<Float>){
+        if (wallCollisions[0]) {
+            velocity.y = -SPEED* abs(yMultiplier)
+        }
+        if (wallCollisions[1]) {
+            velocity.y = SPEED*abs(yMultiplier)
+        }
+        if(paddleCollision){
+            velocity.x = multipliers[0] * SPEED
+            velocity.y = multipliers[1]* SPEED
+            yMultiplier = multipliers[1]
         }
     }
 
