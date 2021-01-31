@@ -2,10 +2,8 @@ package com.hermannm.helicopter.sprites.task1
 
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Sprite
-import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector3
-import com.hermannm.helicopter.sprites.task3.Helicopter3
 
 class Helicopter1(x: Float, y: Float) {
     companion object {

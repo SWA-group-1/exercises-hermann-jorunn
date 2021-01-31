@@ -20,7 +20,7 @@ class Helicopter2(x: Float, y: Float) {
         velocity.scl(1/deltaTime)
     }
     // xMultiplier: 1 / -1 / 0, yMultiplier: 1 / -1 / 0
-    // collisions: [top, right, bottom, left]
+    // collisions: { top, right, bottom, left }
     fun control(xMultiplier: Int, yMultiplier: Int, collisions: HashMap<String, Boolean>) {
         var x = xMultiplier
         var y = yMultiplier
