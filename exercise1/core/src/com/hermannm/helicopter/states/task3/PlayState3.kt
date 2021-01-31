@@ -21,28 +21,28 @@ class PlayState3(stateManager: GameStateManager): PlayState(stateManager) {
     fun wallCollisions(helicopter: Helicopter3): HashMap<String, Boolean> {
         return hashMapOf(
             "top" to !helicopter.bounds.overlaps(Rectangle(
-                0F, //chopper.getTexture().getWidth().toFloat(),
+                0F,
                 0F,
                 HelicopterGame.WIDTH,
-                HelicopterGame.HEIGHT - helicopter.getTexture().getTexture().getHeight()
+                HelicopterGame.HEIGHT - helicopter.sprite.getHeight()
             )),
             "right" to !helicopter.bounds.overlaps(Rectangle(
-                    0F, //chopper.getTexture().getWidth().toFloat(),
                     0F,
-                    HelicopterGame.WIDTH,
-                    HelicopterGame.HEIGHT - helicopter.getTexture().getTexture().getHeight()
+                    0F,
+                    HelicopterGame.WIDTH - helicopter.sprite.getWidth(),
+                    HelicopterGame.HEIGHT
             )),
             "bottom" to !helicopter.bounds.overlaps(Rectangle(
-                    0F, //chopper.getTexture().getWidth().toFloat(),
                     0F,
+                    helicopter.sprite.getHeight(),
                     HelicopterGame.WIDTH,
-                    HelicopterGame.HEIGHT - helicopter.getTexture().getTexture().getHeight()
+                    HelicopterGame.HEIGHT - helicopter.sprite.getHeight()
             )),
             "left" to !helicopter.bounds.overlaps(Rectangle(
-                    0F, //chopper.getTexture().getWidth().toFloat(),
+                    helicopter.sprite.getWidth(),
                     0F,
-                    HelicopterGame.WIDTH,
-                    HelicopterGame.HEIGHT - helicopter.getTexture().getTexture().getHeight()
+                    HelicopterGame.WIDTH - helicopter.sprite.getWidth(),
+                    HelicopterGame.HEIGHT
             ))
         )
     }
@@ -54,34 +54,32 @@ class PlayState3(stateManager: GameStateManager): PlayState(stateManager) {
             "bottom" to false,
             "left" to false
         )
-        var thisx: Float = thisHelicopter.position.x
-        var thisy: Float = thisHelicopter.position.y
-        var height: Float = thisHelicopter.getTexture().getTexture().getHeight().toFloat()
-        var width: Float = thisHelicopter.getTexture().getTexture().getWidth().toFloat()
+        val thisX: Float = thisHelicopter.position.x
+        val thisY: Float = thisHelicopter.position.y
+        val thisHeight: Float = thisHelicopter.sprite.getHeight()
+        val thisWidth: Float = thisHelicopter.sprite.getWidth()
         for (helicopter in helicopters) {
             if(thisHelicopter != helicopter && thisHelicopter.bounds.overlaps(helicopter.bounds)) {
-                var xOverlap: Float
-                var yOverlap: Float
-                var x: Float = helicopter.position.x
-                var y: Float = helicopter.position.y
-                if (thisx < x) {
-                    xOverlap = thisx - x + width
+                val x: Float = helicopter.position.x
+                val y: Float = helicopter.position.y
+                val xOverlap = if (thisX < x) {
+                    thisX - x + thisWidth
                 } else {
-                    xOverlap = x - thisx + width
+                    x - thisX + thisWidth
                 }
-                if (thisy < y) {
-                    yOverlap = thisy - y + height
+                val yOverlap = if (thisY < y) {
+                    thisY - y + thisHeight
                 } else {
-                    yOverlap = y - thisy + height
+                    y - thisY + thisHeight
                 }
                 if (xOverlap > yOverlap){
-                    if (thisy < y) {
+                    if (thisY < y) {
                         collisions["top"] = true
                     } else {
                         collisions["bottom"] = true
                     }
                 } else {
-                    if (thisx < x) {
+                    if (thisX < x) {
                         collisions["right"] = true
                     } else {
                         collisions["left"] = true
@@ -95,7 +93,7 @@ class PlayState3(stateManager: GameStateManager): PlayState(stateManager) {
         handleInput();
         for (helicopter in helicopters) {
             helicopter.changeDirection(wallCollisions(helicopter))
-            helicopter.update(deltaTime);
+            helicopter.update(deltaTime)
             helicopter.changeDirection(helicopterCollisions(helicopter))
         }
     }
@@ -105,7 +103,7 @@ class PlayState3(stateManager: GameStateManager): PlayState(stateManager) {
         sprites.draw(background, 0F, 0F, HelicopterGame.WIDTH, HelicopterGame.HEIGHT)
         for (helicopter in helicopters) {
             sprites.draw(
-                    helicopter.getTexture(),
+                    helicopter.sprite,
                     helicopter.position.x,
                     helicopter.position.y
             )
