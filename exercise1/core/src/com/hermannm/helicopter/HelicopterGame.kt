@@ -2,6 +2,7 @@ package com.hermannm.helicopter
 
 import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.InputMultiplexer
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.hermannm.helicopter.states.GameStateManager
@@ -18,6 +19,7 @@ class HelicopterGame : ApplicationAdapter() {
     override fun create() {
         batch = SpriteBatch()
         stateManager = GameStateManager()
+        Gdx.input.setInputProcessor(InputMultiplexer())
         Gdx.gl.glClearColor(0F, 0F, 0F, 1F)
         stateManager?.push(MenuState(stateManager!!))
     }

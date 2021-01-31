@@ -1,6 +1,7 @@
 package com.hermannm.helicopter.states
 
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.InputMultiplexer
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.scenes.scene2d.Actor
@@ -19,7 +20,10 @@ class BackButton(stateManager: GameStateManager) {
     private val backButton = Image(Texture("backButton.png"))
     private val backButtonSize: Float = 100F
     init {
-        Gdx.input.setInputProcessor(stage)
+        val inputMultiplexer: InputMultiplexer = Gdx.input.getInputProcessor() as InputMultiplexer;
+        if (!inputMultiplexer.getProcessors().contains(stage)) {
+            inputMultiplexer.addProcessor(stage);
+        }
         backButton.setSize(backButtonSize, backButtonSize)
         backButton.addListener(object : ClickListener() {
             override fun clicked(event: InputEvent?, x: Float, y: Float) {

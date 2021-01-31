@@ -1,6 +1,7 @@
 package com.hermannm.helicopter.states
 
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.InputMultiplexer
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.scenes.scene2d.InputEvent
@@ -28,7 +29,10 @@ class MenuState(stateManager: GameStateManager): State(stateManager) {
     private val task3Img = Image(Texture("task3.png"))
     private val task4Img = Image(Texture("task4.png"))
     init {
-        Gdx.input.setInputProcessor(stage)
+        val inputMultiplexer: InputMultiplexer = Gdx.input.getInputProcessor() as InputMultiplexer;
+        if (!inputMultiplexer.getProcessors().contains(stage)) {
+            inputMultiplexer.addProcessor(stage);
+        }
         table.left().bottom()
         task1Img.addListener(object : ClickListener() {
             override fun clicked(event: InputEvent?, x: Float, y: Float) {
