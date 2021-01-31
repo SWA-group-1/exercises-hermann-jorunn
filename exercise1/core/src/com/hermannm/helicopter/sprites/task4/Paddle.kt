@@ -37,13 +37,26 @@ class Paddle(x: Float, y: Float) {
         velocity.scl(1/deltaTime)
     }
 
+    fun setPosition(x:Float, y:Float){
+        position.x = x;
+        position.y = y;
+    }
+
     fun getPosition(): Vector3 {
         return position
     }
+
+    fun getVelocity(): Vector3{
+        return velocity
+    }
+
     fun getTexture(): Texture {
         return paddle
     }
     fun getBounds(): Rectangle {
         return Rectangle(position.x, position.y, paddle.getWidth().toFloat(), paddle.getHeight().toFloat())
+    }
+    fun dispose(){
+        paddle.dispose()
     }
 }
