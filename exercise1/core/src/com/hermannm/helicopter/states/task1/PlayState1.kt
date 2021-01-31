@@ -6,9 +6,9 @@ import com.badlogic.gdx.math.Rectangle
 import com.hermannm.helicopter.HelicopterGame
 import com.hermannm.helicopter.sprites.task1.Helicopter1
 import com.hermannm.helicopter.states.GameStateManager
-import com.hermannm.helicopter.states.State
+import com.hermannm.helicopter.states.PlayState
 
-class PlayState1(stateManager: GameStateManager): State(stateManager) {
+class PlayState1(stateManager: GameStateManager): PlayState(stateManager) {
     init {
         camera.setToOrtho(false, HelicopterGame.WIDTH, HelicopterGame.HEIGHT)
     }
@@ -60,9 +60,11 @@ class PlayState1(stateManager: GameStateManager): State(stateManager) {
                 helicopter1.getPosition().y
         )
         sprites.end()
+        super.render(sprites)
     }
     override fun dispose() {
         background.dispose()
+        super.dispose()
     }
     override fun handleInput() {}
 }
