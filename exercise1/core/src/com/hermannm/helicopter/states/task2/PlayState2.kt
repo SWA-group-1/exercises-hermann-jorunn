@@ -4,13 +4,10 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.math.Rectangle
-import com.hermannm.helicopter.Controller
 import com.hermannm.helicopter.HelicopterGame
-import com.hermannm.helicopter.sprites.task1.Helicopter1
 import com.hermannm.helicopter.sprites.task2.Helicopter2
 import com.hermannm.helicopter.states.GameStateManager
 import com.hermannm.helicopter.states.PlayState
-import java.lang.Math.round
 import kotlin.math.roundToInt
 
 class PlayState2(stateManager: GameStateManager): PlayState(stateManager) {
@@ -19,7 +16,7 @@ class PlayState2(stateManager: GameStateManager): PlayState(stateManager) {
     }
     private val background: Texture = Texture("background.jpg")
     private val helicopter: Helicopter2 = Helicopter2(150F, 100F);
-    private val controller: Controller = Controller()
+    private val navigation: Navigation = Navigation()
     private val font: BitmapFont = BitmapFont()
     init {
         font.data.scale(2f)
@@ -54,16 +51,16 @@ class PlayState2(stateManager: GameStateManager): PlayState(stateManager) {
     }
     override fun handleInput() {
         when {
-            controller.upPressed -> {
+            navigation.upPressed -> {
                 helicopter.control(0, 1, wallCollisions(helicopter))
             }
-            controller.rightPressed -> {
+            navigation.rightPressed -> {
                 helicopter.control(1, 0, wallCollisions(helicopter))
             }
-            controller.downPressed -> {
+            navigation.downPressed -> {
                 helicopter.control(0, -1, wallCollisions(helicopter))
             }
-            controller.leftPressed -> {
+            navigation.leftPressed -> {
                 helicopter.control(-1, 0, wallCollisions(helicopter))
             }
             else -> {
@@ -87,11 +84,11 @@ class PlayState2(stateManager: GameStateManager): PlayState(stateManager) {
         font.draw(sprites, "x: " + helicopter.position.x.roundToInt().toString(), 150f, HelicopterGame.HEIGHT - 20f)
         font.draw(sprites, "y: " + helicopter.position.y.roundToInt().toString(), 300f, HelicopterGame.HEIGHT - 20f)
         sprites.end()
-        controller.draw()
+        navigation.draw()
         super.render(sprites)
     }
     override fun dispose() {
-        controller.dispose()
+        navigation.dispose()
         super.dispose()
     }
 }

@@ -1,4 +1,4 @@
-package com.hermannm.helicopter
+package com.hermannm.helicopter.states.task2
 
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.scenes.scene2d.Stage
@@ -11,8 +11,9 @@ import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.viewport.StretchViewport
+import com.hermannm.helicopter.HelicopterGame
 
-class Controller {
+class Navigation {
     var upPressed: Boolean = false
     var downPressed: Boolean = false
     var rightPressed: Boolean = false
@@ -28,8 +29,8 @@ class Controller {
     private val stage: Stage = Stage(viewport, HelicopterGame.batch)
     private val table: Table = Table()
     init {
-        val inputMultiplexer: InputMultiplexer = Gdx.input.getInputProcessor() as InputMultiplexer;
-        if (!inputMultiplexer.getProcessors().contains(stage)) {
+        val inputMultiplexer: InputMultiplexer = Gdx.input.inputProcessor as InputMultiplexer;
+        if (!inputMultiplexer.processors.contains(stage)) {
             inputMultiplexer.addProcessor(stage);
         }
         table.left().bottom()
