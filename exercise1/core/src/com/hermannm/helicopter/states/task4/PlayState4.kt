@@ -166,7 +166,7 @@ class PlayState4(stateManager: GameStateManager): PlayState(stateManager) {
         }
     }
     override fun render(sprites: SpriteBatch) {
-        sprites.setProjectionMatrix(camera.combined)
+        sprites.projectionMatrix = camera.combined
         sprites.begin()
         sprites.draw(background, 0F, 0F, HelicopterGame.WIDTH, HelicopterGame.HEIGHT)
         sprites.draw(
