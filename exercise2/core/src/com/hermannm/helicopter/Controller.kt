@@ -1,25 +1,26 @@
 package com.hermannm.helicopter
 
-import com.hermannm.helicopter.model.Helicopter
+import com.hermannm.helicopter.model.Model
 
-class Controller {
-    companion object {
-        val INSTANCE = Controller()
+class Controller(
+    private val model: Model
+) {
+    fun update(deltaTime: Float) {
+        model.update(deltaTime)
     }
-    private val helicopter: Helicopter = Helicopter(100f, 150f)
     fun up() {
-
+        model.controlHelicopter(0, 1)
     }
     fun right() {
-
+        model.controlHelicopter(1, 0)
     }
     fun down() {
-
+        model.controlHelicopter(0, -1)
     }
     fun left() {
-
+        model.controlHelicopter(-1, 0)
     }
     fun stop() {
-
+        model.controlHelicopter(0, 0)
     }
 }
