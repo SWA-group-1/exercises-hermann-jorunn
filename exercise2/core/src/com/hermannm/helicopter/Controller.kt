@@ -11,7 +11,7 @@ class Controller(
         handleInput()
         model.update(deltaTime)
     }
-    fun handleInput() {
+    private fun handleInput() {
         when {
             view.navigation.upPressed -> {
                 model.controlHelicopter(0, 1)

@@ -2,7 +2,6 @@ package com.hermannm.helicopter.view
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import com.hermannm.helicopter.HelicopterGame
 import com.hermannm.helicopter.model.Bounds
 import com.hermannm.helicopter.model.Helicopter
 import kotlin.math.roundToInt
