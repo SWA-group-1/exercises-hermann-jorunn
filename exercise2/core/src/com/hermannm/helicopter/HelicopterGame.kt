@@ -14,15 +14,15 @@ class HelicopterGame : ApplicationAdapter() {
         var batch: SpriteBatch? = null
     }
     private var model: Model? = null
-    private var controller: Controller? = null
     private var view: View? = null
+    private var controller: Controller? = null
     override fun create() {
         Gdx.input.inputProcessor = InputMultiplexer()
         Gdx.gl.glClearColor(0F, 0F, 0F, 1F)
         batch = SpriteBatch()
         model = Model()
-        controller = Controller(model!!)
-        view = View(model!!, controller!!)
+        view = View(model!!)
+        controller = Controller(model!!, view!!)
     }
     override fun render() {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)

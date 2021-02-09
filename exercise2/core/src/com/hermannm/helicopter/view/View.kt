@@ -7,8 +7,7 @@ import com.hermannm.helicopter.model.Bounds
 import com.hermannm.helicopter.model.Model
 
 class View(
-    model: Model,
-    controller: Controller
+    model: Model
 ) {
     private val camera: OrthographicCamera = OrthographicCamera()
     init {
@@ -17,7 +16,7 @@ class View(
     private val backgroundView: BackgroundView = BackgroundView()
     private val helicopterView: HelicopterView = HelicopterView(model.helicopter)
     private val coordinateView: CoordinateView = CoordinateView(model.helicopter)
-    private val navigation: Navigation = Navigation(controller, camera)
+    val navigation: Navigation = Navigation(camera)
     fun render(sprites: SpriteBatch) {
         sprites.projectionMatrix = camera.combined
         sprites.begin()

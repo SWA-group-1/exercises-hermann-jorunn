@@ -6,8 +6,8 @@ class Helicopter(x: Float, y: Float) {
     companion object {
         const val SPEED = 200f
     }
-    val height = 264
-    val width = 109
+    val height = 109
+    val width = 264
     val position: Vector2 = Vector2(x, y)
     val velocity: Vector2 = Vector2(0f, 0f)
     fun update(deltaTime: Float) {

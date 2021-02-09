@@ -16,9 +16,12 @@ import com.hermannm.helicopter.HelicopterGame
 import com.hermannm.helicopter.model.Bounds
 
 class Navigation(
-    private val controller: Controller,
     camera: OrthographicCamera
 ) {
+    var upPressed: Boolean = false
+    var downPressed: Boolean = false
+    var rightPressed: Boolean = false
+    var leftPressed: Boolean = false
     private val upImg = Image(Texture("upTexture.png"))
     private val downImg = Image(Texture("downTexture.png"))
     private val rightImg = Image(Texture("rightTexture.png"))
@@ -37,40 +40,40 @@ class Navigation(
         upImg.setSize(buttonSize, buttonSize)
         upImg.addListener(object : InputListener() {
             override fun touchUp(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int) {
-                controller.stop()
+                upPressed = false
             }
             override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int): Boolean {
-                controller.up()
+                upPressed = true
                 return true
             }
         })
         downImg.setSize(buttonSize, buttonSize)
         downImg.addListener(object : InputListener() {
             override fun touchUp(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int) {
-                controller.stop()
+                downPressed = false
             }
             override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int): Boolean {
-                controller.down()
+                downPressed = true
                 return true
             }
         })
         rightImg.setSize(buttonSize, buttonSize)
         rightImg.addListener(object : InputListener() {
             override fun touchUp(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int) {
-                controller.stop()
+                rightPressed = false
             }
             override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int): Boolean {
-                controller.right()
+                rightPressed = true
                 return true
             }
         })
         leftImg.setSize(buttonSize, buttonSize)
         leftImg.addListener(object : InputListener() {
             override fun touchUp(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int) {
-                controller.stop()
+                leftPressed = false
             }
             override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int): Boolean {
-                controller.left()
+                leftPressed = true
                 return true
             }
         })
